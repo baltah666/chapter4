@@ -1,0 +1,8 @@
+spine1    ansible_host=192.168.174.251
+spine2    ansible_host=192.168.174.168
+leaf1    ansible_host=192.168.174.166
+leaf2    ansible_host=192.168.174.167
+#192.168.174.166  Leaf1
+
+[all:vars]
+ansible_python_interpreter=/usr/bin/python3
