@@ -1,0 +1,42 @@
+---
+- name: Install Configuration File
+  hosts:
+    - automation
+  roles:
+    - Juniper.junos
+  connection: local
+  gather_facts: no
+
+#  vars_prompt:
+#    - name: username
+#      prompt: Junos Username
+#      private: no
+
+#    - name: password
+#      prompt: Junos Password
+#      private: yes
+
+  tasks:
+#    - name: install configuration file onto device
+#      juniper_junos_config:
+#        provider:
+#          host: "{{ ansible_host }}"
+#          user: "{{ username }}"
+#          passwd: "{{ password }}"
+#          timeout: 120
+#        load: set
+#        src: "config/ntp.set"
+#        comment: install-set.yaml playbook -- load ntp.set file
+
+    - name: install set commands onto device
+      juniper_junos_config:
+        provider:
+          host: "{{ ansible_host }}"
+          user: "{{ username }}"
+          passwd: "{{ password }}"
+          timeout: 120
+        load: set
+        lines:
+          - delete system name-server 198.51.100.100
+          - set system name-server 198.51.100.101
+        comment: install-set.yaml playbook -- fix name server address

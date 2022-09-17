@@ -9,6 +9,11 @@
 
 
   tasks:
+    - name: show ansible_host in verbose mode
+      debug:
+        var: ansible_host
+        verbosity: 1
+
     - name: get uptime using galaxy module
       juniper_junos_command:
         commands:
@@ -20,6 +25,10 @@
           passwd: "{{ password }}"
       register: uptime
 
-    - name: display uptimes
+    # - name: display uptimes (Python style)
+    #   debug:
+    #     var: uptime['stdout_lines']
+
+    - name: display uptimes (Ansible shortcut)
       debug:
-        var: uptime
+        var: uptime.stdout_lines
